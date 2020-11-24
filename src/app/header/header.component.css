@@ -1,0 +1,40 @@
+/* header {
+    display: block;
+    height: 180px;
+    background-color: aqua;
+    background-image: url(../../favicon.ico);
+    background-repeat: no-repeat;
+}
+
+h1 {
+    text-indent: -9999px;
+    width: 940px;
+    height: 130px;
+    margin: 0px;
+}
+
+nav {
+    clear: both;
+    color: #ffffff;
+    background-color: #aeaca8;
+    height: 30px;
+}
+
+nav ul {
+    margin: 0px;
+    padding: 5px 0px 5px 30px;
+}
+
+nav li {
+    display: inline;
+    margin-right: 40px;
+}
+
+nav li a {
+    color: #ffffff;
+}
+
+nav li a:hover,
+nav li a.current {
+    color: #000000;
+} */
