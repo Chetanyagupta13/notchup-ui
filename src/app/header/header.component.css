@@ -1,28 +1,14 @@
-/* header {
-    display: block;
-    height: 180px;
-    background-color: aqua;
-    background-image: url(../../favicon.ico);
-    background-repeat: no-repeat;
-}
-
-h1 {
-    text-indent: -9999px;
-    width: 940px;
-    height: 130px;
-    margin: 0px;
-}
-
 nav {
-    clear: both;
-    color: #ffffff;
-    background-color: #aeaca8;
-    height: 30px;
+    background-color: #ffffff;
+    border: rgb(192, 188, 188) 1px solid;
+    border-left: none;
+    border-right: none;
+    margin-top: 80px;
+    border-radius: 0px;
 }
 
 nav ul {
     margin: 0px;
-    padding: 5px 0px 5px 30px;
 }
 
 nav li {
@@ -31,10 +17,10 @@ nav li {
 }
 
 nav li a {
-    color: #ffffff;
+    color: darkgrey;
 }
 
 nav li a:hover,
 nav li a.current {
     color: #000000;
-} */
+}

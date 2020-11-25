@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { BookTrialComponent } from './book-trial/book-trial.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { SectionComponent } from './section/section.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    BookTrialComponent
+    BookTrialComponent,
+    SectionComponent
   ],
   imports: [
     BrowserModule,

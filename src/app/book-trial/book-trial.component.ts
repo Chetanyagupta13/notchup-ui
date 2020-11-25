@@ -46,11 +46,13 @@ export class BookTrialComponent implements OnInit {
         this._allCourses.push(item);
       });
     });
-
-    }
+  }
 
   onSubmit(){
     console.log(this.trialForm);
+    this.courseSelected = false;
+    this.dateSelected = false;
+    this.timeSelectd = false;
     let data = {
       course: this.getSelectedCourse(),
       parentEmail: this.trialForm.value.parentEmail,
@@ -62,10 +64,21 @@ export class BookTrialComponent implements OnInit {
       this.trialBooked = true;
     });
     this.trialForm.reset();
+    this.trialForm.setControl('courseName', new FormControl("Select a Course For Trial",Validators.required));
+    this.trialForm.setControl('slotTime', new FormControl("Select slot time",Validators.required));
+    setTimeout(()=>{
+      this.remove();
+    },5000)
   }
 
   onCourseChange(courseSelected:string){
+    this.min_date = '';
+    this.max_date = '';
     this.courseSelected = true;
+    this.dateSelected = false;
+    this.timeSelectd = false;
+    this.possible_date = [];
+    this.possible_time = [];
     this._courseIndex = this.coursesNames.indexOf(courseSelected);
     let currentTime = new Date().getTime();
     this.courseSlots = this._allCourses[this._courseIndex].slots;
@@ -86,6 +99,7 @@ export class BookTrialComponent implements OnInit {
 
   onDateSelect(){
     this.dateSelected = true;
+    this.possible_time = [];
     this.possible_date.forEach((item)=>{
 
       let seletedDate:string = this.trialForm.value.trialDate;
@@ -103,6 +117,9 @@ export class BookTrialComponent implements OnInit {
         hour += (date.getHours()%12);
         if(date.getHours()>12){
           this.possible_time.push(hour+':'+minutes+' PM');
+        }
+        else if(date.getHours() == 12){
+          this.possible_time.push(12+':'+minutes+' PM');
         }
         else{
           this.possible_time.push(hour+':'+minutes+' AM');
@@ -145,5 +162,9 @@ export class BookTrialComponent implements OnInit {
 
   onTimeChange(){
     this.timeSelectd = true;
+  }
+
+  remove(){
+    this.trialBooked = false;
   }
 }
