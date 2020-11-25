@@ -1,8 +1,7 @@
 import { CourseDetailService } from './course-detail.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import{Course,Slot} from './course';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-book-trial',
@@ -21,6 +20,9 @@ export class BookTrialComponent implements OnInit {
   public min_date = "";
   public max_date = "";
   public trialBooked = false;
+  public courseSelected = false;
+  public dateSelected = false;
+  public timeSelectd = false;
 
 
   private _courseIndex:number; 
@@ -28,15 +30,15 @@ export class BookTrialComponent implements OnInit {
 
   ngOnInit(): void {
     this.trialForm = new FormGroup({
-      'parentName': new FormControl(null),
-      'parentEmail':new FormControl(null),
-      'parentNumber':new FormControl(null),
-      'childName': new FormControl(null),
-      'childAge': new FormControl(null),
+      'parentName': new FormControl(null, Validators.required),
+      'parentEmail':new FormControl(null, [Validators.required, Validators.email]),
+      'parentNumber':new FormControl(null, Validators.required),
+      'childName': new FormControl(null, Validators.required),
+      'childAge': new FormControl(null, Validators.required),
       'havePC': new FormControl(this.havePC[0]),
-      'trialDate': new FormControl(null),
-      'courseName': new FormControl("Select a Course For Trial"),
-      'slotTime': new FormControl("Select slot time"),
+      'trialDate': new FormControl(null,Validators.required),
+      'courseName': new FormControl("Select a Course For Trial",Validators.required),
+      'slotTime': new FormControl("Select slot time",Validators.required),
     });
     this.courseDetail.getAvilableCourses().subscribe((courses:Course[])=>{
       courses.forEach((item)=>{
@@ -48,6 +50,7 @@ export class BookTrialComponent implements OnInit {
     }
 
   onSubmit(){
+    console.log(this.trialForm);
     let data = {
       course: this.getSelectedCourse(),
       parentEmail: this.trialForm.value.parentEmail,
@@ -57,10 +60,12 @@ export class BookTrialComponent implements OnInit {
     }
     this.courseDetail.bookTrial(data).subscribe((result)=>{
       this.trialBooked = true;
-    })
+    });
+    this.trialForm.reset();
   }
 
   onCourseChange(courseSelected:string){
+    this.courseSelected = true;
     this._courseIndex = this.coursesNames.indexOf(courseSelected);
     let currentTime = new Date().getTime();
     this.courseSlots = this._allCourses[this._courseIndex].slots;
@@ -80,6 +85,7 @@ export class BookTrialComponent implements OnInit {
   }
 
   onDateSelect(){
+    this.dateSelected = true;
     this.possible_date.forEach((item)=>{
 
       let seletedDate:string = this.trialForm.value.trialDate;
@@ -135,5 +141,9 @@ export class BookTrialComponent implements OnInit {
       slots: [{slot: time+'', instructor_count:instructor_count}]
     }
     return course;
+  }
+
+  onTimeChange(){
+    this.timeSelectd = true;
   }
 }

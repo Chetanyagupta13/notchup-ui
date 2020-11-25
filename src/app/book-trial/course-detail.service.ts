@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CourseDetailService {
-  private _url = "http://localhost:3000/api";
+  private _url = "https://notchup-server.herokuapp.com/api";
+  // private _url = "http://localhost:3000/api";
   constructor(private _http: HttpClient) {
   }
 
