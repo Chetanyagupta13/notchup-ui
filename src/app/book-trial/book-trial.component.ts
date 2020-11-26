@@ -131,7 +131,7 @@ export class BookTrialComponent implements OnInit {
     let time = this.trialForm.value.slotTime.split(':');
     let utctime = new Date(this.trialForm.value.trialDate).getTime();
     console.log(utctime);
-    if(time == 'AM'){
+    if(time[1].split(' ')[1] == 'AM'){
       utctime += (+time[0])*60*60*1000;
     }
     else{
