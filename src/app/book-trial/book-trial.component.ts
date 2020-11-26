@@ -64,7 +64,7 @@ export class BookTrialComponent implements OnInit {
       this.trialBooked = true;
       setTimeout(()=>{
         this.remove();
-      },5000)
+      },3000)
     });
     this.trialForm.reset();
     this.trialForm.setControl('courseName', new FormControl("Select a Course For Trial",Validators.required));
